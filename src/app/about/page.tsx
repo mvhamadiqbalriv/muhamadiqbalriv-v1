@@ -211,14 +211,15 @@ export default async function AboutPage() {
 
       <div className="mt-6 space-y-5 text-sm sm:text-base text-muted leading-relaxed">
         <p>
-          Hi! I&apos;m <strong className="text-foreground">Muhamad Iqbal</strong>,
-          a web developer passionate about building modern web applications.
+          Hi! I&apos;m{" "}
+          <strong className="text-foreground">Muhamad Iqbal</strong>, a web
+          developer passionate about building modern web applications.
         </p>
 
         <p>
-          I have experience with various technologies including React,
-          Next.js, TypeScript, Node.js, and more. I love learning new things
-          and sharing knowledge through posts on this blog.
+          I have experience with various technologies including React, Next.js,
+          TypeScript, Node.js, and more. I love learning new things and sharing
+          knowledge through posts on this blog.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">

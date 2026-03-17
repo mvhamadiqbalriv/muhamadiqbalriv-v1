@@ -65,8 +65,8 @@ export default async function HomePage() {
         <div className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-              Hi, I&apos;m <span className="name-highlight">Muhamad Iqbal</span>{" "}
-              👋
+              Hi, I&apos;m{" "}
+              <span className="name-highlight">Muhamad Iqbal Rivaldi</span> 👋
             </h1>
             <p className="mt-3 text-base sm:text-lg text-muted leading-relaxed">
               A developer who loves building things on the web. I write about
