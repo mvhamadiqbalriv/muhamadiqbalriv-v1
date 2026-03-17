@@ -4,16 +4,19 @@ import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import type { Experience } from "@/lib/data";
+import { deleteUploadedFiles } from "@/lib/uploads";
 
 export async function saveExperience(formData: FormData) {
   if (!(await verifySession())) throw new Error("Unauthorized");
 
   const id = (formData.get("id") as string) || null;
+  const logo = (formData.get("logo") as string)?.trim() || null;
   const experience = {
     company: (formData.get("company") as string).trim(),
     position: (formData.get("position") as string).trim(),
     employment_type: (formData.get("employmentType") as string)?.trim() || null,
     location: (formData.get("location") as string)?.trim() || null,
+    logo,
     start_date: (formData.get("startDate") as string).trim(),
     end_date: (formData.get("endDate") as string)?.trim() || null,
     description: (formData.get("description") as string).trim(),
@@ -24,11 +27,21 @@ export async function saveExperience(formData: FormData) {
   };
 
   if (id) {
+    const { data: existing } = await supabase
+      .from("experiences")
+      .select("logo")
+      .eq("id", id)
+      .single();
+
     const { error } = await supabase
       .from("experiences")
       .update(experience)
       .eq("id", id);
     if (error) throw new Error(error.message);
+
+    if (existing?.logo && existing.logo !== logo) {
+      await deleteUploadedFiles([existing.logo]);
+    }
   } else {
     // New entry gets sort_order = 0 (top), push others down
     try {
@@ -50,6 +63,7 @@ export async function saveExperience(formData: FormData) {
 
 export async function saveExperienceGroup(
   company: string,
+  logo: string | null,
   positions: Array<{
     position: string;
     employment_type: string | null;
@@ -74,6 +88,7 @@ export async function saveExperienceGroup(
 
   const rows = positions.map((p, idx) => ({
     company,
+    logo,
     position: p.position,
     employment_type: p.employment_type,
     location: p.location,
@@ -96,7 +111,17 @@ export async function saveExperienceGroup(
 export async function deleteExperience(id: string) {
   if (!(await verifySession())) throw new Error("Unauthorized");
 
+  const { data: existing } = await supabase
+    .from("experiences")
+    .select("logo")
+    .eq("id", id)
+    .single();
+
   await supabase.from("experiences").delete().eq("id", id);
+
+  if (existing?.logo) {
+    await deleteUploadedFiles([existing.logo]);
+  }
 
   revalidatePath("/about");
   revalidatePath("/admin/experiences");

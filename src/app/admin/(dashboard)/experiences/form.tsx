@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { saveExperience, saveExperienceGroup } from "@/lib/actions/experiences";
+import { ImageUploadButton } from "@/components/image-upload-button";
 import { Plus, Trash2 } from "lucide-react";
 import type { Experience } from "@/lib/data";
 
@@ -40,6 +41,7 @@ export function ExperienceForm({ experience, id }: Readonly<Props>) {
 
   // Multi-position state (create mode only)
   const [company, setCompany] = useState(experience?.company ?? "");
+  const [logo, setLogo] = useState(experience?.logo ?? "");
   const [positions, setPositions] = useState<PositionEntry[]>([
     experience
       ? {
@@ -89,6 +91,7 @@ export function ExperienceForm({ experience, id }: Readonly<Props>) {
       } else {
         await saveExperienceGroup(
           company.trim(),
+          logo.trim() || null,
           positions.map((p) => ({
             position: p.position.trim(),
             employment_type: p.employmentType.trim() || null,
@@ -114,6 +117,7 @@ export function ExperienceForm({ experience, id }: Readonly<Props>) {
     return (
       <form onSubmit={handleSubmit} className="mt-6 max-w-2xl space-y-4">
         {id && <input type="hidden" name="id" value={id} />}
+        <input type="hidden" name="logo" value={logo} />
         <div>
           <label
             htmlFor="company"
@@ -143,6 +147,39 @@ export function ExperienceForm({ experience, id }: Readonly<Props>) {
             defaultValue={experience?.position}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-foreground focus:outline-none dark:border-gray-700 dark:bg-gray-900"
           />
+        </div>
+        <div>
+          <p className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Company Logo
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
+              {logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logo}
+                  alt="Company logo preview"
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <div className="h-full w-full" />
+              )}
+            </div>
+            <ImageUploadButton
+              folder="logos"
+              label="Upload Logo"
+              onUploaded={setLogo}
+            />
+            {logo && (
+              <button
+                type="button"
+                onClick={() => setLogo("")}
+                className="rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+              >
+                Remove
+              </button>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -281,6 +318,40 @@ export function ExperienceForm({ experience, id }: Readonly<Props>) {
           onChange={(e) => setCompany(e.target.value)}
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-foreground focus:outline-none dark:border-gray-700 dark:bg-gray-900"
         />
+      </div>
+
+      <div>
+        <p className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Company Logo
+        </p>
+        <div className="flex items-center gap-3">
+          <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
+            {logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logo}
+                alt="Company logo preview"
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="h-full w-full" />
+            )}
+          </div>
+          <ImageUploadButton
+            folder="logos"
+            label="Upload Logo"
+            onUploaded={setLogo}
+          />
+          {logo && (
+            <button
+              type="button"
+              onClick={() => setLogo("")}
+              className="rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+            >
+              Remove
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="space-y-4">

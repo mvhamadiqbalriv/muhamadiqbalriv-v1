@@ -5,9 +5,15 @@ import { ImagePlus } from "lucide-react";
 
 interface Props {
   onUploaded: (url: string) => void;
+  folder?: "images" | "logos";
+  label?: string;
 }
 
-export function ImageUploadButton({ onUploaded }: Readonly<Props>) {
+export function ImageUploadButton({
+  onUploaded,
+  folder = "images",
+  label = "Upload Image",
+}: Readonly<Props>) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -17,7 +23,7 @@ export function ImageUploadButton({ onUploaded }: Readonly<Props>) {
     setUploading(true);
     const fd = new FormData();
     fd.append("file", file);
-    fd.append("folder", "images");
+    fd.append("folder", folder);
     const res = await fetch("/api/upload", { method: "POST", body: fd });
     const data = await res.json();
     if (data.url) onUploaded(data.url);
@@ -41,7 +47,7 @@ export function ImageUploadButton({ onUploaded }: Readonly<Props>) {
         className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-100 disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
       >
         <ImagePlus size={14} />
-        {uploading ? "Uploading..." : "Upload Image"}
+        {uploading ? "Uploading..." : label}
       </button>
     </>
   );
