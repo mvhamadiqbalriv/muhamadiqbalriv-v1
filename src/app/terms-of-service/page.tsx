@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of service for AgentOC.",
+  description: "Terms of service for applications and services by Muhamad Iqbal Rivaldi.",
 };
 
 export default function TermsOfServicePage() {
@@ -16,9 +16,9 @@ export default function TermsOfServicePage() {
 
         <div className="mt-6 space-y-5 text-sm leading-relaxed text-muted sm:text-base">
           <p>
-            These Terms of Service govern use of AgentOC, an application
-            operated by Muhamad Iqbal Rivaldi. By using the application, users
-            agree to these terms.
+            These Terms of Service govern applications and services operated by
+            Muhamad Iqbal Rivaldi. By using any covered application or service,
+            users agree to these terms.
           </p>
 
           <section>
@@ -26,9 +26,9 @@ export default function TermsOfServicePage() {
               Use of the Application
             </h2>
             <p className="mt-2">
-              Users must use AgentOC lawfully and may not misuse, disrupt, or
-              attempt unauthorized access to the application or connected
-              services.
+              Users must use the applications and services lawfully and may not
+              misuse, disrupt, or attempt unauthorized access to them or any
+              connected services.
             </p>
           </section>
 
@@ -37,9 +37,10 @@ export default function TermsOfServicePage() {
               Google OAuth Access
             </h2>
             <p className="mt-2">
-              If users connect a Google account, AgentOC will request only the
-              OAuth permissions needed for displayed features. Users can revoke
-              access at any time from their Google account settings.
+              If users connect a Google account, the relevant application will
+              request only the OAuth permissions needed for displayed features.
+              Users can revoke access at any time from their Google account
+              settings.
             </p>
           </section>
 
@@ -48,8 +49,8 @@ export default function TermsOfServicePage() {
               Availability
             </h2>
             <p className="mt-2">
-              The application is provided as available. Features may change,
-              pause, or stop without prior notice.
+              Applications and services are provided as available. Features may
+              change, pause, or stop without prior notice.
             </p>
           </section>
 
@@ -58,9 +59,9 @@ export default function TermsOfServicePage() {
               Limitation of Liability
             </h2>
             <p className="mt-2">
-              AgentOC is provided without warranties. To the maximum extent
-              permitted by law, the operator is not liable for indirect,
-              incidental, or consequential damages from use of the application.
+              Applications and services are provided without warranties. To the
+              maximum extent permitted by law, the operator is not liable for
+              indirect, incidental, or consequential damages from use of them.
             </p>
           </section>
 

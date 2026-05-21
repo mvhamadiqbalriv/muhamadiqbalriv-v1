@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for AgentOC.",
+  description: "Privacy policy for applications and services by Muhamad Iqbal Rivaldi.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -16,9 +16,10 @@ export default function PrivacyPolicyPage() {
 
         <div className="mt-6 space-y-5 text-sm leading-relaxed text-muted sm:text-base">
           <p>
-            AgentOC is operated by Muhamad Iqbal Rivaldi. This policy explains
-            how the application handles information when users authorize access
-            through Google OAuth.
+            This Privacy Policy applies to applications and services operated by
+            Muhamad Iqbal Rivaldi. It explains how information is handled when
+            users interact with those applications, including when users
+            authorize access through Google OAuth.
           </p>
 
           <section>
@@ -26,10 +27,9 @@ export default function PrivacyPolicyPage() {
               Information We Access
             </h2>
             <p className="mt-2">
-              The application may request access to basic Google account
-              information and any additional OAuth scopes clearly displayed on
-              the Google consent screen. Access is limited to the features users
-              choose to use.
+              Applications may request access to basic account information and
+              any additional OAuth scopes clearly displayed on the consent
+              screen. Access is limited to the features users choose to use.
             </p>
           </section>
 
@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
               How Information Is Used
             </h2>
             <p className="mt-2">
-              Information is used only to provide application functionality,
+              Information is used only to provide app or service functionality,
               authenticate users, improve reliability, and respond to support
               requests. It is not sold or shared for advertising purposes.
             </p>
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
             <p className="mt-2">
               User data is not shared with third parties except when required to
               operate the service, comply with law, prevent abuse, or protect the
-              application and its users.
+              applications, services, and users.
             </p>
           </section>
 
@@ -60,8 +60,8 @@ export default function PrivacyPolicyPage() {
               Data Retention and Deletion
             </h2>
             <p className="mt-2">
-              Users may request deletion of data associated with the application
-              by contacting support at
+              Users may request deletion of data associated with an application
+              or service by contacting support at
               <a
                 href="mailto:muhamadiqbalrivaldiwork@gmail.com"
                 className="accent-link ml-1 break-all"
